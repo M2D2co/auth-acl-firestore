@@ -1,0 +1,40 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function testACL(rId, act) {
+      let uid = request.auth.uid;
+      let acl = /databases/$(database)/documents/acl/$(rId)/$(act)/$(uid);
+      return exists(acl);
+    }
+
+    match /users/{userId}/{document=**} {
+      allow list: if request.auth != null;
+      allow read, update: if userId == request.auth.uid;
+    }
+
+    match /data/{resourceId} {
+      allow list: if request.auth != null; 
+      allow get: if testACL(resourceId, 'read');
+      allow create: if request.resource.data.createdBy == request.auth.uid;
+      allow update: if testACL(resourceId, 'update');
+      allow delete: if testACL(resourceId, 'delete');
+    }
+
+    match /data/{resourceId}/{document=**} {
+      allow read: if testACL(resourceId, 'read');
+      allow create: if testACL(resourceId, 'create');
+      allow update: if testACL(resourceId, 'update');
+      allow delete: if testACL(resourceId, 'delete');
+    }
+
+    match /acl/{resourceId}/{document=**} {
+      allow read, write: if testACL(resourceId, 'admin');
+    }
+
+    match /acl/{resourceId}/{action}/{userId} {
+      allow read: if userId == request.auth.uid;
+    }
+
+  }
+}

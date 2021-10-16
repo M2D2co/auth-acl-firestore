@@ -1,0 +1,57 @@
+<h1>Authorization Admin</h1>
+
+<main>
+
+  <h2>Data Record</h2>
+  <div *ngIf="item">
+    <h3>ID</h3>
+    <div>{{item.id}}</div>
+
+    <h3>Created By</h3>
+    <div>{{item.createdBy}}</div>
+
+    <h3>Created On</h3>
+    <div>{{item.createdOn | date:'yyyy-MM-dd hh:mm:ss'}}</div>
+  </div>
+
+  <h2>Permissions</h2>
+  <form [formGroup]="permissionForm" (submit)="add($event)">
+    <table>
+      <thead>
+        <tr>
+          <th>Action</th>
+          <th>User</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let perm of permissions">
+          <td>{{perm.action}}</td>
+          <td>{{perm.uid}}</td>
+          <td><button (click)="remove(perm.action, perm.uid)" type="button">Remove</button></td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td>
+            <select formControlName="action">
+              <option *ngFor="let action of actions" [value]="action.id">{{action.name}}</option>
+            </select>
+          </td>
+          <td>
+            <ng-container *ngIf="users | async">
+              <select formControlName="user">
+                <option *ngFor="let user of users | async" [value]="user.uid">{{user.displayName}} ({{user.email}})
+                </option>
+              </select>
+            </ng-container>
+          </td>
+          <td>
+            <button type="submit">Add</button>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  </form>
+
+</main>

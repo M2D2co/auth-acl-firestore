@@ -1,0 +1,8 @@
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+td {
+  padding: 0.25rem 0.5rem;
+}

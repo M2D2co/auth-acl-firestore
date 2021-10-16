@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'auth-acl-firestore';
+  title = 'Authorization Models';
+  user = this.auth.authState;
+
+  constructor(
+    private auth: AngularFireAuth,
+  ) { }
+
 }

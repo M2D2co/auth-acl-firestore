@@ -1,1 +1,176 @@
-/* You can add global styles to this file, and also import other style files */
+@use './assets/scss/colors';
+@import '~@angular/material/theming';
+@import './assets/scss/theme';
+@import './assets/scss/forms';
+@import '~firebaseui/dist/firebaseui.css';
+
+
+* { box-sizing: border-box; }
+*:focus {
+  outline: none;
+  outline-color: rbga(0, 0, 0, 0);
+}
+
+.material-icons {
+  direction: ltr;
+  display: inline-block;
+  font-family: 'Material Icons';
+  font-size: 24px;
+  font-style: normal;
+  font-weight: normal;
+  letter-spacing: normal;
+  line-height: 1;
+  text-transform: none;
+  white-space: nowrap;
+  word-wrap: normal;
+  -webkit-font-feature-settings: 'liga';
+  font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  font-size: 16px;
+  font-family: "Helvetica Neue", sans-serif;
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  color: rgba(0, 0, 0, .87);
+}
+
+html, body,
+div, span, pre, code, button, a,
+article, section, main nav, header, footer,
+h1, h2, h3, h4, h5, h6,
+form, legend, label, input, textarea, select,
+ul, ol, li, dl, dd, dt {
+  box-sizing: border-box;
+}
+
+main {
+  margin: 2rem 1rem;
+}
+
+.sr-only {
+  position: absolute;
+  top: -999rem;
+  left: -999rem;
+}
+
+a:link,
+a:visited {
+  color: colors.$primary;
+  text-decoration: none;
+  &.router-link-active {
+    color: colors.$grey-dark;
+  }
+}
+
+a:hover,
+a:focus {
+  transition: all ease-in-out 150ms;
+  color: colors.$accent;
+  text-decoration: underline;
+}
+
+.mat-flat-button.mat-primary, .mat-raised-button.mat-primary, .mat-fab.mat-primary, .mat-mini-fab.mat-primary {
+  &:hover, &:focus {
+    background: darken(#0A3F7F,10%);
+  }
+}
+
+.router-link-active {
+  color: colors.$accent;
+}
+
+h1, header .title {
+  font-size: 1.5rem;
+  color: colors.$primary;
+  font-family: 'Raleway', cursive;
+  padding: .75rem 1rem;
+  margin: 0;
+  text-shadow: 0 0 3px white;
+}
+
+h2 {
+  font-size: 1.75rem;
+  color: colors.$primary;
+  font-family: 'Raleway', cursive;
+}
+
+h3 {
+  font-size: 1.0625rem;
+  color: colors.$grey;
+  letter-spacing: .0625rem;
+  font-variant: small-caps;
+}
+
+h4 {
+  font-size: 1rem;
+  color: colors.$grey;
+  font-weight: normal;
+}
+
+.snackbar-error {
+  background: colors.$danger;
+  color: white;
+  button {
+    color: white;
+    background: darken(colors.$danger, 10%);
+  }
+}
+
+.snackbar-success {
+  background: colors.$primary;
+}
+
+.snackbar-info {
+  background: colors.$accent;
+  color: colors.$grey-dark;
+  button {
+    color: colors.$grey-dark;
+    background: darken(colors.$accent, 10%);
+  }
+}
+
+.chat, .search {
+  position: fixed;
+  top: 3rem;
+  bottom: 4.75rem;
+  right: 0;
+  left: 0;
+}
+
+.chat-list {
+  overflow: auto;
+  scroll-behavior: smooth;
+  height: 100%;
+  padding: 1rem 1rem 10rem;
+}
+
+.info  {
+  grid-area: info;
+  font-size: .75rem;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  border-top: solid 1px colors.$accent;
+  border-bottom: solid 1px colors.$accent;
+  margin: 1rem 0 0;
+  padding: .5rem 1rem;
+  gap: 1ch;
+  .input-group-form {
+    display: flex;
+    flex: 1;
+    gap: 1ch;
+    input { margin: 0; }
+    button { flex-shrink: 0; }
+  }
+}
+
+.mat-spinner { margin: 1rem auto; }
